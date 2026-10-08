@@ -1,15 +1,10 @@
 version: 2.1
-executors:
-  docker-publisher:
-    docker:
-      - image: cimg/base:stable
 jobs:
   build-and-push:
-    executor: docker-publisher
+    machine:
+      image: ubuntu-2404:current
     steps:
       - checkout
-      - setup_remote_docker:
-          version: default
       - run:
           name: Build and Push Docker Image
           command: |
@@ -22,3 +17,4 @@ workflows:
   commit-workflow:
     jobs:
       - build-and-push
+h
